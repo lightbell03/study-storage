@@ -145,7 +145,8 @@ e61,e62,e63,e64,e65,e66
 }
 ```
 
-![Untitled](Item%201%202efba22aa1304330be4ad6fee2ba4323/Untitled.png)
+![Untitled](https://user-images.githubusercontent.com/70000247/218750383-4e7d2b18-0345-4f8f-9f34-de9b209b07ed.png)
+
 
 ```java
 public interface NumberInterface {
@@ -204,7 +205,9 @@ public class Item{
 }
 ```
 
-![Untitled](Item%201%202efba22aa1304330be4ad6fee2ba4323/Untitled%201.png)
+![Untitled 1](https://user-images.githubusercontent.com/70000247/218750319-b73ac261-9b4c-4e4c-8a91-d6e96e2c7d67.png)
+
+
 
 `NumberInterface` 인터페이스에 of 스태틱 팩토리 메서드를 이용해 51 이상이면 `OverFiftyNumber` 클래스를 50 이하이면 `UnderFiftyNumber` 클래스를 반환해 주고 있다. `main` 함수에서 사용자는 구체 클래스를 알지 못하여도 인터페이스가 알아서 클래스를 결정해 반환해줄 수 있게 된다.
 
