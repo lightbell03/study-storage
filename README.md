@@ -9,3 +9,5 @@
 👉 [item 3: private 생성자나 열거 타입으로 싱글턴임을 보증하라](https://github.com/lightbell03/effective-java/blob/main/item%203.md)
 <br>
 👉 [item 4: 인스턴스화를 막으려거든 private 생성자를 사용하라](https://github.com/lightbell03/effective-java/blob/main/item%204.md)
+<br>
+👉 [item 4: 인스턴스화를 막으려거든 private 생성자를 사용하라](https://github.com/lightbell03/effective-java/blob/main/item5.md)
