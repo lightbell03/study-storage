@@ -12,4 +12,4 @@
 <br>
 👉 [item 5: 자원을 직접 명시하지 말고 의존 객체 주입을 사용하라](https://github.com/lightbell03/effective-java/blob/main/effective-java/Item%205.md)
 <br>
-👉 [item 6 - 불필요한 객체 생성을 피하라](https://github.com/lightbell03/effective-java/blob/main/effective-java/Item%206.md)
+👉 [item 6: 불필요한 객체 생성을 피하라](https://github.com/lightbell03/effective-java/blob/main/effective-java/item%206.md)
