@@ -10,4 +10,4 @@
 <br>
 👉 [item 4: 인스턴스화를 막으려거든 private 생성자를 사용하라](https://github.com/lightbell03/effective-java/blob/main/item%204.md)
 <br>
-👉 [item 4: 인스턴스화를 막으려거든 private 생성자를 사용하라](https://github.com/lightbell03/effective-java/blob/main/item5.md)
+👉 [item 5: 인스턴스화를 막으려거든 private 생성자를 사용하라](https://github.com/lightbell03/effective-java/blob/main/item5.md)
