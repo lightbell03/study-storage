@@ -138,7 +138,7 @@ public class LinkedHashMapTest {
 
 [https://www.geeksforgeeks.org/linkedhashmap-removeeldestentry-method-in-java/](https://www.geeksforgeeks.org/linkedhashmap-removeeldestentry-method-in-java/)
 
-![Untitled](item%207%20-%20%E1%84%83%E1%85%A1%E1%84%8A%E1%85%B3%E1%86%AB%20%E1%84%80%E1%85%A2%E1%86%A8%E1%84%8E%E1%85%A6%E1%84%85%E1%85%B3%E1%86%AF%20%E1%84%8E%E1%85%A1%E1%86%B7%E1%84%8C%E1%85%A9%E1%84%92%E1%85%A2%E1%84%8C%E1%85%A6%20%E1%84%92%E1%85%A1%E1%84%85%E1%85%A1%20fca5208de0514385be720cec0299fc82/Untitled.png)
+![Untitled](image/Untitled.png)
 
 사용자가 정의해둔 사이즈보다 크게 될 경우 put 메서드를 사용할 때 자동으로 객체가 삭제되고 있다.
 
