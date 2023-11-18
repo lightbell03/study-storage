@@ -22,4 +22,6 @@
 <br>
 👉 [item 10: equals는 일반 규약을 지켜 재정의하라](https://github.com/lightbell03/effective-java/blob/main/effective-java/item%2010/item%2010%20-%20equals%EB%8A%94%20%EC%9D%BC%EB%B0%98%20%EA%B7%9C%EC%95%BD%EC%9D%84%20%EC%A7%80%EC%BC%9C%20%EC%9E%AC%EC%A0%95%EC%9D%98%ED%95%98%EB%9D%BC.md)
 <br>
-👉 [Item 11: eqauls 를 재정의하려거든 hashCode 도 재정의하라](https://github.com/lightbell03/effective-java/blob/main/effective-java/Item%2011/Item%2011%20-%20eqauls%20%EB%A5%BC%20%EC%9E%AC%EC%A0%95%EC%9D%98%ED%95%98%EB%A0%A4%EA%B1%B0%EB%93%A0%20hashCode%20%EB%8F%84%20%EC%9E%AC%EC%A0%95%EC%9D%98%ED%95%98%EB%9D%BC.md)
+👉 [Item 11: eqauls 를 재정의하려거든 hashCode 도 재정의하라](https://github.com/lightbell03/study-storage/blob/main/book/effective-java/Item%2011/Item%2011%20-%20eqauls%20%EB%A5%BC%20%EC%9E%AC%EC%A0%95%EC%9D%98%ED%95%98%EB%A0%A4%EA%B1%B0%EB%93%A0%20hashCode%20%EB%8F%84%20%EC%9E%AC%EC%A0%95%EC%9D%98%ED%95%98%EB%9D%BC.md)
+<br>
+👉 [Item 12: toString을 항상 재정의하라](https://github.com/lightbell03/study-storage/blob/main/book/effective-java/Item%2012/Item%2012%20-%20toString%EC%9D%84%20%ED%95%AD%EC%83%81%20%EC%9E%AC%EC%A0%95%EC%9D%98%ED%95%98%EB%9D%BC.md)
