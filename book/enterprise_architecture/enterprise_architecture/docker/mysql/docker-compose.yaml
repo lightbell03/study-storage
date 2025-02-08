@@ -1,0 +1,13 @@
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: enterprise_arch
+      MYSQL_USER: user01
+      MYSQL_PASSWORD: test01!
+      MYSQL_ROOT_PASSWORD: test01!
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./initdb.d:/docker-entrypoint-initdb.d
