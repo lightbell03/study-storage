@@ -4,7 +4,6 @@ import org.example.common.MfDate;
 import org.example.common.Money;
 import org.example.config.ConnectionFactory;
 
-import java.math.BigDecimal;
 import java.sql.*;
 
 public class Gateway {

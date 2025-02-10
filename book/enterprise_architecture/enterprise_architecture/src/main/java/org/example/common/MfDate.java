@@ -24,4 +24,8 @@ public class MfDate {
         c.add(Calendar.DATE, days);
         return new MfDate(c.getTime());
     }
+
+    public boolean after(MfDate date) {
+        return this.asof.after(date.asof);
+    }
 }

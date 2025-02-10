@@ -14,6 +14,10 @@ public class Money {
         return new Money(amount);
     }
 
+    public static Money dollars(int amount) {
+        return new Money(new BigDecimal(amount));
+    }
+
     public Money add(Money money) {
         return new Money(amount.add(money.amount));
     }
