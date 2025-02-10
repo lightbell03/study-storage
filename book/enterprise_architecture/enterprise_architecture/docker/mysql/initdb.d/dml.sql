@@ -1,6 +1,6 @@
-INSERT INTO `products` values (1, 'name-1', 'type-1'),
-                              (2, 'name-2', 'type-2'),
-                              (3, 'name-3', 'type-3');
+INSERT INTO `products` values (1, 'name-1', 'W'),
+                              (2, 'name-2', 'S'),
+                              (3, 'name-3', 'D');
 
 INSERT INTO `contracts` values (1, 1, 1000, '2024-01-01'),
                                (2, 2, 3000, '2024-01-01'),
