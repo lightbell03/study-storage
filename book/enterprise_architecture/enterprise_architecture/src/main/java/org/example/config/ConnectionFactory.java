@@ -6,14 +6,28 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
     private static ConnectionFactory INSTANCE;
-    private final String url;
-    private final String user;
-    private final String password;
+    private String driver;
+    private String url;
+    private String user;
+    private String password;
 
-    private ConnectionFactory() {
-        this.url = "";
-        this.user = "";
-        this.password = "";
+    private ConnectionFactory() {}
+
+
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public static ConnectionFactory getInstance() {
@@ -26,8 +40,9 @@ public class ConnectionFactory {
 
     public Connection getConnection() {
         try {
+            Class.forName(driver);
             return DriverManager.getConnection(url, user, password);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
