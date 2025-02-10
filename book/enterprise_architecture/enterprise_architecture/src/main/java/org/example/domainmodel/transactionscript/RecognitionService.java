@@ -15,7 +15,7 @@ public class RecognitionService {
         this.db = db;
     }
 
-    public Money recognizedRevenue(long contractNumber, Date asOf) {
+    public Money recognizedRevenue(long contractNumber, MfDate asOf) {
         try (ResultSet rs = db.findRecognitionFor(contractNumber, asOf)) {
             Money result = Money.dollars(new BigDecimal(0));
             while (rs.next()) {

@@ -15,14 +15,14 @@ public class Gateway {
     }
     private static final String findRecognitionStatement = """
             SELECT amount 
-             FROM revenueRecognition
-             WHERE contract = ? AND recognized_on <= ?
+             FROM revenue_recognition
+             WHERE contract = ? AND recognition_on <= ?
             """;
 
-    public ResultSet findRecognitionFor(long contractID, Date asof) throws SQLException {
+    public ResultSet findRecognitionFor(long contractID, MfDate asof) throws SQLException {
         PreparedStatement stmt = db.prepareStatement(findRecognitionStatement);
         stmt.setLong(1, contractID);;
-        stmt.setDate(2, asof);
+        stmt.setDate(2, asof.toSqlDate());
         return stmt.executeQuery();
     }
 

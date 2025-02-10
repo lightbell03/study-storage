@@ -4,7 +4,7 @@ import org.example.config.ConnectionFactory;
 
 public class Application {
     private static final String driver = "com.mysql.cj.jdbc.Driver";
-    private static final String url = "mysql:jdbc://localhost:3306";
+    private static final String url = "jdbc:mysql://localhost:3306/enterprise_arch";
     private static final String user = "user01";
     private static final String password = "test01!";
 
@@ -16,7 +16,7 @@ public class Application {
         instance.setPassword(password);
     }
 
-    public Gateway gateway() {
+    private Gateway gateway() {
         return new Gateway();
     }
 

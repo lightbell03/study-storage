@@ -6,7 +6,7 @@ import java.util.Date;
 public class MfDate {
     private final Date asof;
 
-    private MfDate(Date asof) {
+    public MfDate(Date asof) {
         this.asof = asof;
     }
 
