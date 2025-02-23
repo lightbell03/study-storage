@@ -1,0 +1,63 @@
+version: '3.7'
+
+services:
+  zookeeper:
+    build:
+      context: ./zookeeper
+      dockerfile: Dockerfile
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    networks:
+      - kafka_net
+
+  kafka-1:
+    build:
+      context: ./kafka
+      dockerfile: Dockerfile
+      args:
+        - BROKER_ID=1
+        - BOOTSTRAP_SERVER=kafka-1
+        - PORT=9092
+    container_name: kafka-1
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    networks:
+      - kafka_net
+  kafka-2:
+    build:
+      context: ./kafka
+      dockerfile: Dockerfile
+      args:
+        - BROKER_ID=2
+        - BOOTSTRAP_SERVER=kafka-2
+        - PORT=9093
+    container_name: kafka-2
+    ports:
+      - "9093:9093"
+    depends_on:
+      - zookeeper
+    networks: 
+      - kafka_net
+  kafka-3:
+    build:
+      context: ./kafka
+      dockerfile: Dockerfile
+      args:
+        - BROKER_ID=3
+        - BOOTSTRAP_SERVER=kafka-3
+        - PORT=9094
+    container_name: kafka-3
+    ports:
+      - "9094:9094"
+    depends_on:
+      - zookeeper
+    networks: 
+      - kafka_net
+    
+networks:
+  kafka_net:
+    name: kafka_net
+    driver: bridge
