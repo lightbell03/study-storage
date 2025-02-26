@@ -6,7 +6,15 @@ import java.util.Map;
 public class UniqueMap {
     private Map<Long, Person> people = new HashMap<>();
 
-    private static UniqueMap soleInstance = new UniqueMap();
+    private static UniqueMap soleInstance;
+
+    public static UniqueMap getInstance() {
+        if(soleInstance == null) {
+            soleInstance = new UniqueMap();
+        }
+
+        return soleInstance;
+    }
 
     public static void addPerson(Person person) {
         soleInstance.people.put(person.getId(), person);
