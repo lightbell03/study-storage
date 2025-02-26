@@ -1,4 +1,4 @@
-package org.example.unitwork;
+package org.example.chap11.unitwork;
 
 import org.example.common.DomainObject;
 import org.example.common.IdGenerator;

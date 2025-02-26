@@ -1,14 +1,12 @@
-package org.example.unitwork;
+package org.example.chap11.unitwork;
 
 import org.example.common.Assert;
 import org.example.common.DomainObject;
 import org.example.common.MapperRegistry;
-import org.example.domainmodel.domainmodel.Product;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 public class UnitOfWork {
     private List<DomainObject> newObjects = new ArrayList<>();
