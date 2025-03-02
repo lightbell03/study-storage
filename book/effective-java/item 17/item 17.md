@@ -197,11 +197,11 @@ public void flip(int bitIndex) {
 
 BigInteger 는 다단계 연산 속도를 높여주는 가변 동반 클래스(companion class)를 package-private으로 두고 있다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/46b09ef3-10b8-436d-9c91-a70e871fe655/ed6b37ba-549c-435e-aacb-6886ffcb11b4/Untitled.png)
+![Untitled](./image/Untitled01.png)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/46b09ef3-10b8-436d-9c91-a70e871fe655/7934e26d-94e9-4711-a957-7effbadf0ff8/Untitled.png)
+![Untitled](./image/Untitled02.png)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/46b09ef3-10b8-436d-9c91-a70e871fe655/9f2fd671-3d06-408c-9b63-a0c3d036d29e/Untitled.png)
+![Untitled](./image/Untitled03.png)
 
 클라이언트의 원하는 복잡한 연산들을 정확히 예측할 수 있다면 package-private의 가변 동반 클래스만으로 충분하다.
 
