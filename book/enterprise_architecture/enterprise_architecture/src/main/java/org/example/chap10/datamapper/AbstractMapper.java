@@ -6,7 +6,9 @@ import org.example.config.ConnectionFactory;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractMapper<K, D> {
@@ -42,4 +44,12 @@ public abstract class AbstractMapper<K, D> {
     }
 
     abstract protected D doLoad(K id, ResultSet rs) throws SQLException;
+
+    protected List<D> loadAll(ResultSet rs) throws SQLException {
+        List<D> result = new ArrayList<>();
+        while (rs.next()) {
+            result.add(load(rs));
+        }
+        return result;
+    }
 }
