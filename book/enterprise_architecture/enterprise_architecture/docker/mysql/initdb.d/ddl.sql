@@ -21,7 +21,7 @@ CREATE TABLE `revenue_recognition`
     PRIMARY KEY (contract, recognition_on)
 );
 
-CREATE TABLE `person`
+CREATE TABLE `people`
 (
     `ID`                   INT         NOT NULL,
     `lastname`             VARCHAR(50) NOT NULL,

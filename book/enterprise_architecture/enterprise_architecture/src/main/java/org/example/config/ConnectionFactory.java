@@ -2,6 +2,7 @@ package org.example.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
@@ -11,7 +12,8 @@ public class ConnectionFactory {
     private String user;
     private String password;
 
-    private ConnectionFactory() {}
+    private ConnectionFactory() {
+    }
 
 
     public void setDriver(String driver) {
@@ -36,6 +38,10 @@ public class ConnectionFactory {
         }
 
         return INSTANCE;
+    }
+
+    public PreparedStatement prepare(String statement) throws SQLException {
+        return getConnection().prepareStatement(statement);
     }
 
     public Connection getConnection() {
