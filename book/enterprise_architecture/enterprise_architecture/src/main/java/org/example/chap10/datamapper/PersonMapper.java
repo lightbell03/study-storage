@@ -46,4 +46,30 @@ public class PersonMapper extends AbstractMapper<Long, Person> {
             throw new RuntimeException(e);
         }
     }
+
+    public List<Person> findByLastNameUsingStatementSource(String pattern) {
+        return findMany(new FindByLastName(pattern));
+    }
+
+    static class FindByLastName implements StatementSource {
+        private final String lastname;
+
+        public FindByLastName(String lastname) {
+            this.lastname = lastname;
+        }
+
+        @Override
+        public String sql() {
+            return "SELECT " + COLUMNS +
+                    " FROM people " +
+                    " WHERE UPPER(lastname) like UPPER(?) " +
+                    " ORDER BY lastname";
+        }
+
+        @Override
+        public Object[] parameters() {
+            Object[] result = {lastname};
+            return result;
+        }
+    }
 }
