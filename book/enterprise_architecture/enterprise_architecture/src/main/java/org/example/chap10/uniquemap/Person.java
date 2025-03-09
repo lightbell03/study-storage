@@ -1,4 +1,4 @@
-package org.example.chap11.uniquemap;
+package org.example.chap10.uniquemap;
 
 public class Person {
     private Long id;

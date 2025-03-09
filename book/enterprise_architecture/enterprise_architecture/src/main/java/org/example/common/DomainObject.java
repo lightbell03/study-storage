@@ -1,6 +1,6 @@
 package org.example.common;
 
-import org.example.chap11.unitwork.UnitOfWork;
+import org.example.chap10.unitwork.UnitOfWork;
 
 public abstract class DomainObject {
     private Object id;
