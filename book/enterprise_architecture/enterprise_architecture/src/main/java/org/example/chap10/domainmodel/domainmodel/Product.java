@@ -1,4 +1,4 @@
-package org.example.domainmodel.domainmodel;
+package org.example.chap10.domainmodel.domainmodel;
 
 public class Product {
     private String name;

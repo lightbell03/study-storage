@@ -1,4 +1,4 @@
-package org.example.domainmodel.domainmodel;
+package org.example.chap10.domainmodel.domainmodel;
 
 import org.example.common.MfDate;
 import org.example.common.Money;

@@ -1,4 +1,4 @@
-package org.example.chap10.unitwork;
+package org.example.chap11.unitwork;
 
 import org.example.common.Mapper;
 import org.example.common.MapperRegistry;

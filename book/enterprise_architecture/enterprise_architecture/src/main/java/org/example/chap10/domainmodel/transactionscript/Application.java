@@ -1,4 +1,4 @@
-package org.example.domainmodel.transactionscript;
+package org.example.chap10.domainmodel.transactionscript;
 
 import org.example.config.ConnectionFactory;
 

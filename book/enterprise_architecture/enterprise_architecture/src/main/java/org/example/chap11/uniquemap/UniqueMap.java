@@ -1,4 +1,4 @@
-package org.example.chap10.uniquemap;
+package org.example.chap11.uniquemap;
 
 import java.util.HashMap;
 import java.util.Map;

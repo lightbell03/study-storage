@@ -1,11 +1,10 @@
-package org.example.domainmodel.transactionscript;
+package org.example.chap10.domainmodel.transactionscript;
 
 import org.example.common.ApplicationException;
 import org.example.common.MfDate;
 import org.example.common.Money;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
