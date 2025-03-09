@@ -35,7 +35,7 @@ public abstract class AbstractMapper<K, D> {
 
     protected D load(ResultSet rs) throws SQLException {
         K id = (K) rs.getObject(1);
-        if(loadedMap.containsKey(id)) {
+        if (loadedMap.containsKey(id)) {
             return loadedMap.get(id);
         }
         D result = doLoad(id, rs);
@@ -51,5 +51,20 @@ public abstract class AbstractMapper<K, D> {
             result.add(load(rs));
         }
         return result;
+    }
+
+    protected List<D> findMany(StatementSource source) {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = ConnectionFactory.getInstance().prepare(source.sql());
+            for (int i = 0; i < source.parameters().length; i++) {
+                stmt.setObject(i, source.parameters()[i]);
+            }
+            rs = stmt.executeQuery();
+            return loadAll(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
