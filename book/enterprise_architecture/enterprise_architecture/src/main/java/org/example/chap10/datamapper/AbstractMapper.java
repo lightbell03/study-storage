@@ -1,8 +1,9 @@
 package org.example.chap10.datamapper;
 
-import org.example.common.DomainObject;
+import org.example.common.ApplicationException;
 import org.example.config.ConnectionFactory;
 
+import java.lang.reflect.Field;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +13,23 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractMapper<K, D> {
+    private static final String nextIdQuery =
+            "SELECT AUTO_INCREMENT " +
+                    " FROM INFORMATION_SCHEMA.TABLES " +
+                    " WHERE TABLE_SCHEMA = DATABASE() " +
+                    " AND TABLE_NAME = %s";
+    private K findNextIncrementId(String tableName) {
+        try {
+            PreparedStatement pstmt = ConnectionFactory.getInstance().prepare(nextIdQuery);
+            pstmt.setString(0, tableName);
+            ResultSet rs = pstmt.executeQuery();
+
+            return (K) rs.getObject(0);
+        } catch (Exception e) {
+            throw new ApplicationException(e);
+        }
+    }
+
     protected Map<K, D> loadedMap = new HashMap<>();
 
     abstract protected String findStatement();
@@ -67,4 +85,40 @@ public abstract class AbstractMapper<K, D> {
             throw new RuntimeException(e);
         }
     }
+
+    public K insert(DomainObject<K, D> subject) {
+        PreparedStatement insertStatement = null;
+        try {
+            insertStatement = ConnectionFactory.getInstance().prepare(insertStatement());
+
+            D domainObject = subject.getObject();
+            Class<?> domainObjectClass = domainObject.getClass();
+
+            Table table = domainObjectClass.getAnnotation(Table.class);
+
+            K nextId = findNextIncrementId(table.name());
+            subject.setId(nextId);
+            insertStatement.setObject(1, subject.getId());
+
+            for (Field field : domainObjectClass.getDeclaredFields()) {
+                if(field.isAnnotationPresent(Id.class)) {
+                    field.set(domainObject, nextId);
+                }
+            }
+
+
+            doInsert(subject.getObject(), insertStatement);
+
+            insertStatement.execute();
+            loadedMap.put(subject.getId(), subject.getObject());
+
+            return subject.getId();
+        } catch (SQLException | IllegalAccessException e) {
+            throw new ApplicationException(e);
+        }
+    }
+
+    abstract protected String insertStatement();
+
+    abstract protected void doInsert(D subject, PreparedStatement insertStatement) throws SQLException;
 }

@@ -1,5 +1,6 @@
 package org.example.chap10.datamapper;
 
+import org.example.common.ApplicationException;
 import org.example.config.ConnectionFactory;
 
 import java.sql.PreparedStatement;
@@ -26,6 +27,36 @@ public class PersonMapper extends AbstractMapper<Long, Person> {
         String firstName = rs.getString(3);
         int numDependents = rs.getInt(4);
         return new Person(lastName, firstName, numDependents);
+    }
+
+    private static final String updateStatementString =
+            "UPDATE people " +
+                    " SET lastname = ?, firstname = ?, number_of_dependents = ? " +
+                    " WHERE id = ?";
+
+    public void update(Person subject) {
+        PreparedStatement updateStatement = null;
+        try {
+            updateStatement = ConnectionFactory.getInstance().prepare(updateStatementString);
+            updateStatement.setString(1, subject.getLastname());
+            updateStatement.setString(2, subject.getFirstname());
+            updateStatement.setInt(3, subject.getNumberOfDependents());
+            updateStatement.setInt(4, subject.getId().intValue());
+        } catch (SQLException e) {
+            throw new ApplicationException(e);
+        }
+    }
+
+    @Override
+    protected String insertStatement() {
+        return "INSERT INTO people VALUES (? ,?, ?, ?)";
+    }
+
+    @Override
+    protected void doInsert(Person subject, PreparedStatement insertStatement) throws SQLException {
+        insertStatement.setString(2, subject.getLastname());
+        insertStatement.setString(3, subject.getFirstname());
+        insertStatement.setInt(4, subject.getNumberOfDependents());
     }
 
     private static final String findLastNameStatement =
