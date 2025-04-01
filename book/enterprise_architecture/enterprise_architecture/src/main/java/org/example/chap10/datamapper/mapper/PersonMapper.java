@@ -1,5 +1,7 @@
-package org.example.chap10.datamapper;
+package org.example.chap10.datamapper.mapper;
 
+import org.example.chap10.datamapper.entity.Person;
+import org.example.chap10.datamapper.StatementSource;
 import org.example.common.ApplicationException;
 import org.example.config.ConnectionFactory;
 

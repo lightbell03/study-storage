@@ -1,4 +1,7 @@
-package org.example.chap10.datamapper;
+package org.example.chap10.datamapper.entity;
+
+import org.example.chap10.datamapper.annotation.Id;
+import org.example.chap10.datamapper.annotation.Table;
 
 @Table(name = "person")
 public class Person {

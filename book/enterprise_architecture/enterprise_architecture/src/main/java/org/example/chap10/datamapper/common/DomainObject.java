@@ -1,4 +1,4 @@
-package org.example.chap10.datamapper;
+package org.example.chap10.datamapper.common;
 
 public class DomainObject<K, D> {
     private K id;
