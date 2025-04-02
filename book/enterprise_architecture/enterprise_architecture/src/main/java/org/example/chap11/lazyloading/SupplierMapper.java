@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.example.chap10.datamapper.mapper.AbstractMapper;
 
-public class SupplierMapper extends AbstractMapper<Long, TestProduct> {
+public class SupplierMapper extends AbstractMapper<Long, LazyLoadingProduct> {
 
     @Override
     protected String findStatement() {
@@ -17,9 +17,9 @@ public class SupplierMapper extends AbstractMapper<Long, TestProduct> {
     }
 
     @Override
-    protected TestProduct doLoad(Long id, ResultSet rs) throws SQLException, IllegalAccessException {
+    protected LazyLoadingProduct doLoad(Long id, ResultSet rs) throws SQLException, IllegalAccessException {
         String nameArg = rs.getString(2);
-        TestProduct result = new TestProduct(id, nameArg);
+        LazyLoadingProduct result = new LazyLoadingProduct(id, nameArg);
         Class<?> clz = result.getClass();
         for (Field field : clz.getDeclaredFields()) {
             if (field.isAnnotationPresent(Lazy.class)) {
@@ -36,7 +36,7 @@ public class SupplierMapper extends AbstractMapper<Long, TestProduct> {
     }
 
     @Override
-    protected void doInsert(TestProduct subject, PreparedStatement insertStatement) throws SQLException {
+    protected void doInsert(LazyLoadingProduct subject, PreparedStatement insertStatement) throws SQLException {
 
     }
 
