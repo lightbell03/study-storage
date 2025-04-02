@@ -50,12 +50,12 @@ public abstract class AbstractMapper<K, D> {
             result = load(rs);
 
             return result;
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    protected D load(ResultSet rs) throws SQLException {
+    protected D load(ResultSet rs) throws SQLException, IllegalAccessException {
         K id = (K) rs.getObject(1);
         if (loadedMap.containsKey(id)) {
             return loadedMap.get(id);
@@ -65,9 +65,9 @@ public abstract class AbstractMapper<K, D> {
         return result;
     }
 
-    abstract protected D doLoad(K id, ResultSet rs) throws SQLException;
+    abstract protected D doLoad(K id, ResultSet rs) throws SQLException, IllegalAccessException;
 
-    protected List<D> loadAll(ResultSet rs) throws SQLException {
+    protected List<D> loadAll(ResultSet rs) throws SQLException, IllegalAccessException {
         List<D> result = new ArrayList<>();
         while (rs.next()) {
             result.add(load(rs));
@@ -85,7 +85,7 @@ public abstract class AbstractMapper<K, D> {
             }
             rs = stmt.executeQuery();
             return loadAll(rs);
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }

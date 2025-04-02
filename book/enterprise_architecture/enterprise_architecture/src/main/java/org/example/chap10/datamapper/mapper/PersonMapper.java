@@ -75,10 +75,10 @@ public class PersonMapper extends AbstractMapper<Long, Person> {
             stmt.setString(1, name);
             rs = stmt.executeQuery();
             return loadAll(rs);
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-    }
+	}
 
     public List<Person> findByLastNameUsingStatementSource(String pattern) {
         return findMany(new FindByLastName(pattern));
