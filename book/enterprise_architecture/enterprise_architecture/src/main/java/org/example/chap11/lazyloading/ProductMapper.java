@@ -19,9 +19,14 @@ public class ProductMapper extends AbstractMapper<Long, Product> {
         return INSTANCE;
     }
 
-    public List<Product> findForSupplier(long id) {
+    public List<Product> findForListSupplier(long id) {
         return Collections.emptyList();
     }
+
+    public Product findForValueSupplier(Long id) {
+        return null;
+    }
+
     @Override
     protected String findStatement() {
         return null;

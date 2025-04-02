@@ -23,7 +23,11 @@ public class SupplierMapper extends AbstractMapper<Long, LazyLoadingProduct> {
         Class<?> clz = result.getClass();
         for (Field field : clz.getDeclaredFields()) {
             if (field.isAnnotationPresent(Lazy.class)) {
-                field.set(result, new VirtualList<>(new ProductLoader(id)));
+                if (field.getType() == List.class) {
+                    field.set(result, new VirtualList<>(new ProductLoader(id)));
+                } else {
+                    field.set(result, new ValueHolder(new ProductValueLoader(id)));
+                }
             }
         }
 
@@ -49,7 +53,20 @@ public class SupplierMapper extends AbstractMapper<Long, LazyLoadingProduct> {
 
         @Override
         public List<Product> load() {
-            return ProductMapper.create().findForSupplier(id);
+            return ProductMapper.create().findForListSupplier(id);
+        }
+    }
+
+    public static class ProductValueLoader implements ValueLoader {
+        private Long id;
+
+        public ProductValueLoader(Long id) {
+            this.id = id;
+        }
+
+        @Override
+        public Object load() {
+            return ProductMapper.create().findForValueSupplier(id);
         }
     }
 }
