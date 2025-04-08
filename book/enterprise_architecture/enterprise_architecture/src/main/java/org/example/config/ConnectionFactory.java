@@ -1,9 +1,8 @@
 package org.example.config;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import org.example.common.ApplicationException;
+
+import java.sql.*;
 
 public class ConnectionFactory {
     private static ConnectionFactory INSTANCE;
@@ -51,6 +50,27 @@ public class ConnectionFactory {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
+        }
+    }
+
+    public static void cleanUp(Statement statement) {
+        try {
+            if (statement != null) {
+                statement.close();
+            }
+        } catch (SQLException e) {
+            throw new ApplicationException(e);
+        }
+    }
+
+    public static void cleanUp(Statement statement, ResultSet rs) {
+        cleanUp(statement);
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+        } catch (SQLException e) {
+            throw new ApplicationException(e);
         }
     }
 }
