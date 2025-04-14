@@ -1,13 +1,14 @@
 package org.example.chap11.unitwork;
 
-import org.example.common.Mapper;
+import org.example.chap11.foreignkey.Album;
+import org.example.chap11.foreignkey.AlbumMapper;
 import org.example.common.MapperRegistry;
 
 public class EditAlbumScript {
 
-    public static void updateTitle(String albumId, String title) {
+    public static void updateTitle(Long albumId, String title) {
         UnitOfWork.CurrentUnitOfWorkThreadLocal.newCurrent();
-        Mapper<Album, String> mapper = MapperRegistry.getMapper(Album.class);
+        AlbumMapper mapper = MapperRegistry.getMapper(AlbumMapper.class);
         Album album = mapper.find(albumId);
         album.setTitle(title);
         UnitOfWork.CurrentUnitOfWorkThreadLocal.getCurrent().commit();

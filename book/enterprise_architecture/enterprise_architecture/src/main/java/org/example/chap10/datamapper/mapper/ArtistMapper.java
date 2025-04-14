@@ -2,12 +2,13 @@ package org.example.chap10.datamapper.mapper;
 
 import org.example.chap10.datamapper.ArtistFinder;
 import org.example.chap10.datamapper.entity.Artist;
+import org.example.common.Mapper;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ArtistMapper extends AbstractMapper<Long, Artist> implements ArtistFinder {
+public class ArtistMapper extends AbstractMapper<Long, Artist> implements ArtistFinder, Mapper {
     private static final String COLUMN_LIST = "id, name";
 
     @Override

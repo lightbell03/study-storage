@@ -34,7 +34,7 @@ public abstract class AbstractMapper<K, D> {
         }
     }
 
-    protected Map<K, D> loadedMap = new HashMap<>();
+    protected Map<Object, D> loadedMap = new HashMap<>();
 
     abstract protected String findStatement();
 

@@ -4,12 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.example.chap10.datamapper.mapper.AbstractMapper;
 import org.example.common.ApplicationException;
+import org.example.common.Mapper;
 import org.example.common.MapperRegistry;
 import org.example.config.ConnectionFactory;
 
-public class AlbumMapper extends ForeignKeyAbstractMapper<Long, Album> {
+public class AlbumMapper extends ForeignKeyAbstractMapper<Long, Album> implements Mapper {
 	public Album find(Long id) {
 		return abstractFind(id, "article_id");
 	}
@@ -23,7 +23,7 @@ public class AlbumMapper extends ForeignKeyAbstractMapper<Long, Album> {
 	protected Album doLoad(Long id, ResultSet rs) throws SQLException {
 		String title = rs.getString("title");
 		long artistId = rs.getLong("artist_id");
-		Artist artist = MapperRegistry.getMapper(Artist.class).find(artistId);
+		Artist artist = MapperRegistry.getMapper(ArtistMapper.class).find(artistId);
 		return new Album(id, title, artist);
 	}
 

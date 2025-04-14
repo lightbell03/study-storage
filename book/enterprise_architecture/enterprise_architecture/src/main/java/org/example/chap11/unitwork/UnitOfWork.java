@@ -53,21 +53,22 @@ public class UnitOfWork {
     private void insertNew() {
         for (Iterator<DomainObject> objects = newObjects.iterator(); objects.hasNext(); ) {
             DomainObject obj = objects.next();
-            MapperRegistry.getMapper(obj.getClass()).insert(obj);
+            // todo mapper 확인
+//            MapperRegistry.getMapper(obj.getClass()).insert(obj);
         }
     }
 
     private void updateDirty() {
         for (Iterator<DomainObject> objects = dirtyObjects.iterator(); objects.hasNext(); ) {
             DomainObject obj = objects.next();
-            MapperRegistry.getMapper(obj.getClass()).update(obj);
+//            MapperRegistry.getMapper(obj.getClass()).update(obj);
         }
     }
 
     private void deleteRemoved() {
         for (Iterator<DomainObject> objects = removedObjects.iterator(); objects.hasNext(); ) {
             DomainObject obj = objects.next();
-            MapperRegistry.getMapper(obj.getClass()).delete(obj);
+//            MapperRegistry.getMapper(obj.getClass()).delete(obj);
         }
     }
 
