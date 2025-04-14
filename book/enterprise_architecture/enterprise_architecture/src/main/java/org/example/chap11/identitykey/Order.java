@@ -1,9 +1,15 @@
 package org.example.chap11.identitykey;
 
 public class Order {
-    private Long id;
+    private Key key;
+    private String customer;
 
-    public Long getId() {
-        return id;
+    public Order(Key key, String customer) {
+        this.key = key;
+        this.customer = customer;
+    }
+
+    public Key getKey() {
+        return this.key;
     }
 }

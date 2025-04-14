@@ -25,7 +25,7 @@ public abstract class IdentifyAbstractMapper<K, D> extends AbstractMapper<K, D> 
 
             result = load(rs);
             return result;
-        } catch (SQLException | IllegalAccessException e) {
+        } catch (SQLException e) {
             throw new ApplicationException(e);
         } finally {
             ConnectionFactory.cleanUp(statement);
@@ -34,5 +34,22 @@ public abstract class IdentifyAbstractMapper<K, D> extends AbstractMapper<K, D> 
 
     protected void loadFindStatement(K key, PreparedStatement statement) throws SQLException {
         statement.setObject(1, key);
+    }
+
+    protected D load(ResultSet resultSet) throws SQLException {
+        Key key = createKey(resultSet);
+        if (loadedMap.containsKey(key)) {
+            return loadedMap.get(key);
+        }
+
+        D result = doLoad(key, resultSet);
+        loadedMap.put(key, result);
+        return result;
+    }
+
+    abstract protected D doLoad(Key id, ResultSet resultSet) throws SQLException;
+
+    protected Key createKey(ResultSet resultSet) throws SQLException {
+        return new Key(resultSet.getLong(1));
     }
 }
