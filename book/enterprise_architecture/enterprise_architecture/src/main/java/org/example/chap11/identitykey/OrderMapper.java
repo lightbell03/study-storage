@@ -1,13 +1,14 @@
 package org.example.chap11.identitykey;
 
 import org.example.chap10.datamapper.mapper.AbstractMapper;
+import org.example.common.Mapper;
 import org.example.common.MapperRegistry;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OrderMapper extends IdentifyAbstractMapper<Key, Order> {
+public class OrderMapper extends IdentifyAbstractMapper<Key, Order> implements Mapper {
 
     @Override
     protected String findStatement() {
