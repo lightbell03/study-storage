@@ -11,7 +11,7 @@ import org.example.config.ConnectionFactory;
 
 public class AlbumMapper extends ForeignKeyAbstractMapper<Long, Album> {
 	public Album find(Long id) {
-		return abstractFind(id);
+		return abstractFind(id, "article_id");
 	}
 
 	@Override
