@@ -7,7 +7,7 @@ public class EditAlbumScript {
 
     public static void updateTitle(String albumId, String title) {
         UnitOfWork.CurrentUnitOfWorkThreadLocal.newCurrent();
-        Mapper<Album, String> mapper = MapperRegistry.getMapper(Album.class, String.class);
+        Mapper<Album, String> mapper = MapperRegistry.getMapper(Album.class);
         Album album = mapper.find(albumId);
         album.setTitle(title);
         UnitOfWork.CurrentUnitOfWorkThreadLocal.getCurrent().commit();
