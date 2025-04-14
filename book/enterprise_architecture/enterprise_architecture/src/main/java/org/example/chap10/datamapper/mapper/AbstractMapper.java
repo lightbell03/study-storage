@@ -42,16 +42,19 @@ public abstract class AbstractMapper<K, D> {
         D result = loadedMap.get(id);
         if (result != null) return result;
         PreparedStatement findStatement = null;
+        ResultSet rs = null;
         try {
             findStatement = ConnectionFactory.getInstance().prepare(findStatement());
             findStatement.setObject(1, id);
-            ResultSet rs = findStatement.executeQuery();
+            rs = findStatement.executeQuery();
             rs.next();
             result = load(rs);
 
             return result;
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            ConnectionFactory.cleanUp(findStatement, rs);
         }
     }
 
