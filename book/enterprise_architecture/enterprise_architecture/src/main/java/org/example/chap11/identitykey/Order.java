@@ -6,7 +6,7 @@ import org.example.common.Id;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order {
+public class Order extends DomainObject {
     @Id
     @Column(name = "id")
     private Long id;

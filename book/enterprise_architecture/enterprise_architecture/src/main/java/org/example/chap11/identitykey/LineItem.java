@@ -2,7 +2,7 @@ package org.example.chap11.identitykey;
 
 import org.example.common.MultiId;
 
-public class LineItem {
+public class LineItem extends DomainObject {
     @MultiId
     private LineItemKey key;
     private Integer amount;
