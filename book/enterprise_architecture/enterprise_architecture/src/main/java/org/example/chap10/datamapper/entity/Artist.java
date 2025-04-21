@@ -1,7 +1,7 @@
 package org.example.chap10.datamapper.entity;
 
-import org.example.chap10.datamapper.annotation.Id;
-import org.example.chap10.datamapper.annotation.Table;
+import org.example.common.Id;
+import org.example.common.Table;
 
 @Table(name="artists")
 public class Artist {

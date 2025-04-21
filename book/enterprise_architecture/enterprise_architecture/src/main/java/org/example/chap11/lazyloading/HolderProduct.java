@@ -1,9 +1,7 @@
 package org.example.chap11.lazyloading;
 
-import org.example.chap10.datamapper.annotation.Id;
-import org.example.chap10.datamapper.annotation.Table;
-
-import java.util.List;
+import org.example.common.Id;
+import org.example.common.Table;
 
 @Table(name = "test_product")
 public class HolderProduct {

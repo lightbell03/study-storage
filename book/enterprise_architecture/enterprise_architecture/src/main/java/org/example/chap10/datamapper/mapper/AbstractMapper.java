@@ -1,8 +1,8 @@
 package org.example.chap10.datamapper.mapper;
 
 import org.example.chap10.datamapper.StatementSource;
-import org.example.chap10.datamapper.annotation.Id;
-import org.example.chap10.datamapper.annotation.Table;
+import org.example.common.Id;
+import org.example.common.Table;
 import org.example.chap10.datamapper.common.DomainObject;
 import org.example.common.ApplicationException;
 import org.example.config.ConnectionFactory;

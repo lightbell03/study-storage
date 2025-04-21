@@ -5,36 +5,38 @@ import org.example.common.Mapper;
 import org.example.common.MapperRegistry;
 import org.example.config.ConnectionFactory;
 
+import java.security.Key;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
-public class LineItemMapper extends IdentifyAbstractMapper<Key, LineItem> implements Mapper {
+public class LineItemMapper extends IdentifyAbstractMapper<LineItemKey, LineItem> implements Mapper {
 
     public LineItem find(long orderId, long id) {
-        Key key = new Key(orderId, id);
+        LineItemKey key = new LineItemKey(orderId, id);
         return find(key);
     }
 
-    public LineItem find(Key key) {
+    public LineItem find(LineItemKey key) {
         return abstractFind(key);
     }
 
 
     @Override
-    protected void loadFindStatement(Key key, PreparedStatement statement) throws SQLException {
-        statement.setObject(1, key.getField(0));
-        statement.setObject(2, key.getField(1));
+    protected void loadFindStatement(LineItemKey key, PreparedStatement statement) throws SQLException {
+        statement.setObject(1, key.getOrderId());
+        statement.setObject(2, key.getId());
         super.loadFindStatement(key, statement);
     }
 
     @Override
-    protected LineItem doLoad(Key id, ResultSet rs) throws SQLException {
-        Order order = MapperRegistry.getMapper(OrderMapper.class).find((Long) id.getField(0));
+    protected LineItem doLoad(LineItemKey id, ResultSet rs) throws SQLException {
+        Order order = MapperRegistry.getMapper(OrderMapper.class).find(id.getOrderId());
         return doLoad(id, rs, order);
     }
 
-    private LineItem doLoad(Key id, ResultSet rs, Order order) throws SQLException {
+    private LineItem doLoad(LineItemKey id, ResultSet rs, Order order) throws SQLException {
         LineItem result;
 
         int amount = rs.getInt("amount");
@@ -45,13 +47,6 @@ public class LineItemMapper extends IdentifyAbstractMapper<Key, LineItem> implem
 
         return result;
     }
-
-
-    @Override
-    protected Key createKey(ResultSet resultSet) throws SQLException {
-        return new Key(resultSet.getLong("order_id"), resultSet.getLong("id"));
-    }
-
 
     @Override
     protected String findStatement() {
@@ -77,7 +72,7 @@ public class LineItemMapper extends IdentifyAbstractMapper<Key, LineItem> implem
         ResultSet rs = null;
         try {
             statement = ConnectionFactory.getInstance().prepare(findForOrderString);
-            statement.setObject(1, order.getKey().getField(0));
+            statement.setObject(1, order.getId());
             rs = statement.executeQuery();
             while (rs.next()) {
                 load(rs, order);
@@ -90,12 +85,25 @@ public class LineItemMapper extends IdentifyAbstractMapper<Key, LineItem> implem
     }
 
     protected LineItem load(ResultSet rs, Order order) throws SQLException {
-        Key key = createKey(rs);
+        LineItemKey key = createKey(rs);
         if (loadedMap.containsKey(key)) {
             return loadedMap.get(key);
         }
         LineItem result = doLoad(key, rs, order);
         loadedMap.put(key, result);
         return result;
+    }
+
+    @Override
+    protected String insertStatementString() {
+        return "INSERT INTO line_item VALUES (?, ?, ?, ?)";
+    }
+
+    @Override
+    protected void performInsert(LineItem subject, PreparedStatement pstmt) throws SQLException {
+        pstmt.setLong(1, subject.getKey().getOrderId());
+        pstmt.setLong(2, subject.getKey().getOrderId());
+        pstmt.setInt(3, subject.getAmount());
+        pstmt.setString(4, subject.getProduct());
     }
 }

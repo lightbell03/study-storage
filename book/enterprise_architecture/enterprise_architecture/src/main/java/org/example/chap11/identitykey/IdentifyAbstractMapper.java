@@ -2,13 +2,22 @@ package org.example.chap11.identitykey;
 
 import org.example.chap10.datamapper.mapper.AbstractMapper;
 import org.example.common.ApplicationException;
+import org.example.common.Column;
+import org.example.common.Id;
+import org.example.common.MultiId;
 import org.example.config.ConnectionFactory;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.security.Key;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public abstract class IdentifyAbstractMapper<K, D> extends AbstractMapper<K, D> {
+    private Class<K> domainClazz;
 
     public D abstractFind(K key) {
         D result = loadedMap.get(key);
@@ -37,7 +46,7 @@ public abstract class IdentifyAbstractMapper<K, D> extends AbstractMapper<K, D> 
     }
 
     protected D load(ResultSet resultSet) throws SQLException {
-        Key key = createKey(resultSet);
+        K key = createKey(resultSet);
         if (loadedMap.containsKey(key)) {
             return loadedMap.get(key);
         }
@@ -47,9 +56,65 @@ public abstract class IdentifyAbstractMapper<K, D> extends AbstractMapper<K, D> 
         return result;
     }
 
-    abstract protected D doLoad(Key id, ResultSet resultSet) throws SQLException;
+    abstract protected D doLoad(K id, ResultSet resultSet) throws SQLException;
 
-    protected Key createKey(ResultSet resultSet) throws SQLException {
-        return new Key(resultSet.getLong(1));
+    protected K createKey(ResultSet resultSet) throws SQLException {
+        try {
+            for (Field field : domainClazz.getDeclaredFields()) {
+                if (field.isAnnotationPresent(Id.class)) {
+                    if (field.isAnnotationPresent(Column.class)) {
+                        Column column = field.getAnnotation(Column.class);
+                        String columnName = column.name();
+                        Object key = resultSet.getObject(columnName);
+
+                        return (K) key;
+                    } else {
+                        throw new ApplicationException("not found column annotation");
+                    }
+                } else if (field.isAnnotationPresent(MultiId.class)) {
+                    if (field.isAnnotationPresent(Column.class)) {
+                        Class<?> multiIdClazz = field.getDeclaringClass();
+
+                        Constructor<?> multiIdClazzConstructor = multiIdClazz.getDeclaredConstructor();
+                        Object o = multiIdClazzConstructor.newInstance();
+
+                        for (Field multiIdClazzField : multiIdClazz.getDeclaredFields()) {
+                            if (multiIdClazzField.isAnnotationPresent(Column.class)) {
+                                Column column = multiIdClazzField.getAnnotation(Column.class);
+                                String columnName = column.name();
+
+                                Object columnValue = resultSet.getObject(columnName);
+                                multiIdClazzField.setAccessible(true);
+                                multiIdClazzField.set(o, columnValue);
+                            }
+                        }
+
+                        return (K) o;
+                    }
+                }
+            }
+        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+            throw new ApplicationException(e);
+        }
+
+        throw new ApplicationException("not found id");
     }
+
+    public D insert(D subject) {
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = ConnectionFactory.getInstance().prepare(insertStatementString());
+            performInsert(subject, pstmt);
+            pstmt.executeQuery();
+            return subject;
+        } catch (SQLException e) {
+            throw new ApplicationException(e);
+        } finally {
+            ConnectionFactory.cleanUp(pstmt);
+        }
+    }
+
+    abstract protected String insertStatementString();
+
+    abstract protected void performInsert(D subject, PreparedStatement pstmt) throws SQLException;
 }

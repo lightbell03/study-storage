@@ -1,21 +1,30 @@
 package org.example.chap11.identitykey;
 
+import org.example.common.Column;
+import org.example.common.Id;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private Key key;
+    @Id
+    @Column(name = "id")
+    private Long id;
     private String customer;
     private List<LineItem> lineItems;
 
-    public Order(Key key, String customer) {
-        this.key = key;
+    public Order(Long id, String customer) {
+        this.id = id;
         this.customer = customer;
         this.lineItems = new ArrayList<>();
     }
 
-    public Key getKey() {
-        return this.key;
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getCustomer() {
+        return customer;
     }
 
     public void addLineItem(LineItem lineItem) {
