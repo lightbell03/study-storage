@@ -6,18 +6,17 @@ public class Account {
     private ActivityWindow activityWindow;
 
     public Money calculateBalance() {
+        // todo
         return null;
     }
 
     public boolean withdraw(Money money, AccountId targetAccountId) {
+        // todo
         return false;
     }
 
     public boolean deposit() {
+        // todo
         return false;
-    }
-
-    public static class AccountId {
-        private Long id;
     }
 }
