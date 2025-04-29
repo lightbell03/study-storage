@@ -1,10 +1,13 @@
 package org.example.application.port.in;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+
 import org.example.domain.AccountId;
 import org.example.domain.Money;
 import org.example.share.SelfValidating;
 
+@Getter
 public class SendMoneyCommand extends SelfValidating<SendMoneyCommand> {
     @NotNull
     private final AccountId sourceAccountId;
