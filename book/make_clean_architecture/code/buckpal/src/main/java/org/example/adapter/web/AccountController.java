@@ -22,7 +22,6 @@ public class AccountController {
 	private final ListAccountQuery listAccountQuery;
 	private final LoadAccountQuery loadAccountQuery;
 
-	private final SendMoneyUseCase sendMoneyUseCase;
 	private final CreateAccountUseCase createAccountUseCase;
 
 	@GetMapping("/accounts")
@@ -47,13 +46,5 @@ public class AccountController {
 	public AccountResource createAccount(@RequestBody AccountResource account) {
 		// todo
 		return null;
-	}
-
-	@PostMapping("/accounts/send/{sourceAccountId}/{targetAccountId}/{amount}")
-	public void sendMoney(
-		@PathVariable("sourceAccountId") Long sourceAccountId,
-		@PathVariable("targetAccountId") Long targetAccountId,
-		@PathVariable("amount") Long amount) {
-		// todo
 	}
 }
